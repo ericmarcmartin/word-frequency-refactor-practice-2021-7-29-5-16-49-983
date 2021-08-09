@@ -9,12 +9,10 @@ public class WordFrequencyGame {
         if (message.split(BLANK_SPACE).length == 1) return message + " 1";
 
         try {
-
-            //split the input string with 1 to n pieces of spaces
-            String[] arr = message.split(BLANK_SPACE);
+            String[] words = message.split(BLANK_SPACE);
 
             List<Input> inputList = new ArrayList<>();
-            for (String s : arr) {
+            for (String s : words) {
                 Input input = new Input(s, 1);
                 inputList.add(input);
             }
@@ -36,13 +34,12 @@ public class WordFrequencyGame {
                 String s = w.getValue() + " " + w.getWordCount();
                 joiner.add(s);
             }
+
             return joiner.toString();
         } catch (Exception e) {
 
-
             return "Calculate Error";
         }
-
     }
 
 
