@@ -12,8 +12,6 @@ public class WordFrequencyGame {
         try {
             List<WordInfo> wordInfos = retrieveEachWordInfo(message);
 
-            wordInfos.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
-
             return generateOutput(wordInfos);
         } catch (Exception e) {
 
@@ -39,6 +37,7 @@ public class WordFrequencyGame {
         List<WordInfo> wordInfo = new ArrayList<>();
         generateWordInfo(wordInfos).forEach((key, value) -> wordInfo.add(new WordInfo(key, value.size())));
         wordInfos = wordInfo;
+        wordInfos.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
         return wordInfos;
     }
 
