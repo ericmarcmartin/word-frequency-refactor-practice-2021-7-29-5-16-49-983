@@ -12,12 +12,11 @@ public class WordFrequencyGame {
     }
 
     private List<WordInfo> retrieveEachWordInfo(String message) {
-        List<WordInfo> wordInfo = new ArrayList<>();
-        for (Map.Entry<String, List<WordInfo>> entry : generateEachWord(message)) {
-            wordInfo.add(new WordInfo(entry.getKey(), entry.getValue().size()));
-        }
-        wordInfo.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
-        return wordInfo;
+        return generateEachWord(message)
+                .stream()
+                .map(entry -> new WordInfo(entry.getKey(), entry.getValue().size()))
+                .sorted((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount())
+                .collect(Collectors.toList());
     }
 
     private String generateWordFrequency(List<WordInfo> wordInfos) {
