@@ -11,22 +11,22 @@ public class WordFrequencyGame {
         try {
             String[] words = message.split(BLANK_SPACE);
 
-            List<WordInfo> wordInfoList = new ArrayList<>();
+            List<WordInfo> wordInfos = new ArrayList<>();
             for (String s : words) {
-                wordInfoList.add(new WordInfo(s, 1));
+                wordInfos.add(new WordInfo(s, 1));
             }
 
             //get the map for the next step of sizing the same word
             List<WordInfo> list = new ArrayList<>();
-            for (Map.Entry<String, List<WordInfo>> entry : getListMap(wordInfoList).entrySet()) {
+            for (Map.Entry<String, List<WordInfo>> entry : getListMap(wordInfos).entrySet()) {
                 list.add(new WordInfo(entry.getKey(), entry.getValue().size()));
             }
-            wordInfoList = list;
+            wordInfos = list;
 
-            wordInfoList.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
+            wordInfos.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
 
             StringJoiner joiner = new StringJoiner("\n");
-            for (WordInfo w : wordInfoList) {
+            for (WordInfo w : wordInfos) {
                 String s = w.getValue() + " " + w.getWordCount();
                 joiner.add(s);
             }
