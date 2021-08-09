@@ -21,7 +21,7 @@ public class WordFrequencyGame {
             getListMap(wordInfos).forEach((key, value) -> wordInfo.add(new WordInfo(key, value.size())));
             wordInfos = wordInfo;
 
-            wordInfos.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
+            wordInfos.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
 
             StringJoiner joiner = new StringJoiner("\n");
             for (WordInfo w : wordInfos) {
