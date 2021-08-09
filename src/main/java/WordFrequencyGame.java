@@ -6,17 +6,9 @@ public class WordFrequencyGame {
     public static final String BLANK_SPACE = "\\s+";
 
     public String getResult(String message) {
+        List<WordInfo> wordInfos = retrieveEachWordInfo(message);
 
-        if (message.split(BLANK_SPACE).length == 1) return message + " 1";
-
-        try {
-            List<WordInfo> wordInfos = retrieveEachWordInfo(message);
-
-            return generateWordFrequency(wordInfos);
-        } catch (Exception e) {
-
-            return "Calculate Error";
-        }
+        return generateWordFrequency(wordInfos);
     }
 
     private List<WordInfo> retrieveEachWordInfo(String message) {
