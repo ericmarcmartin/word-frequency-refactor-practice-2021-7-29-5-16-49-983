@@ -19,14 +19,17 @@ public class WordFrequencyGame {
 
             wordInfos.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
 
-            StringJoiner joiner = new StringJoiner("\n");
-            wordInfos.stream().map(w -> String.format("%s %d", w.getValue(), w.getWordCount())).forEach(joiner::add);
-
-            return joiner.toString();
+            return generateOutput(wordInfos);
         } catch (Exception e) {
 
             return "Calculate Error";
         }
+    }
+
+    private String generateOutput(List<WordInfo> wordInfos) {
+        StringJoiner joiner = new StringJoiner("\n");
+        wordInfos.stream().map(w -> String.format("%s %d", w.getValue(), w.getWordCount())).forEach(joiner::add);
+        return joiner.toString();
     }
 
     private List<WordInfo> getEachWordInfo(List<WordInfo> wordInfos) {
@@ -35,7 +38,6 @@ public class WordFrequencyGame {
         wordInfos = wordInfo;
         return wordInfos;
     }
-
 
     private Map<String, List<WordInfo>> generateWordInfo(List<WordInfo> wordInfoList) {
         Map<String, List<WordInfo>> map = new HashMap<>();
