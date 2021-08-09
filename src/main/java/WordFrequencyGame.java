@@ -10,10 +10,8 @@ public class WordFrequencyGame {
         if (message.split(BLANK_SPACE).length == 1) return message + " 1";
 
         try {
-            String[] words = message.split(BLANK_SPACE);
-
             List<WordInfo> wordInfos = Arrays
-                    .stream(words)
+                    .stream(message.split(BLANK_SPACE))
                     .map(word -> new WordInfo(word, 1))
                     .collect(Collectors.toList());
 
