@@ -29,7 +29,7 @@ public class WordFrequencyGame {
 
     private String generateWordFrequency(List<WordInfo> wordInfos) {
         StringJoiner joiner = new StringJoiner("\n");
-        wordInfos.stream().map(w -> String.format("%s %d", w.getValue(), w.getWordCount())).forEach(joiner::add);
+        wordInfos.stream().map(w -> String.format("%s %d", w.getWord(), w.getWordCount())).forEach(joiner::add);
         return joiner.toString();
     }
 
@@ -48,9 +48,9 @@ public class WordFrequencyGame {
             if (mapDoesNotContainWordFromWordInfo(map, wordInfo)) {
                 List<WordInfo> temporaryWordInfo = new ArrayList<>();
                 temporaryWordInfo.add(wordInfo);
-                map.put(wordInfo.getValue(), temporaryWordInfo);
+                map.put(wordInfo.getWord(), temporaryWordInfo);
             } else {
-                map.get(wordInfo.getValue()).add(wordInfo);
+                map.get(wordInfo.getWord()).add(wordInfo);
             }
         });
 
@@ -58,7 +58,7 @@ public class WordFrequencyGame {
     }
 
     private boolean mapDoesNotContainWordFromWordInfo(Map<String, List<WordInfo>> map, WordInfo wordInfo) {
-        return !map.containsKey(wordInfo.getValue());
+        return !map.containsKey(wordInfo.getWord());
     }
 
 }
