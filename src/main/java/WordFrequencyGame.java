@@ -12,11 +12,13 @@ public class WordFrequencyGame {
     }
 
     private List<WordInfo> retrieveEachWordInfo(String message) {
-        List<WordInfo> wordInfos = Arrays
-                .stream(message.split(BLANK_SPACE))
-                .map(word -> new WordInfo(word, 1))
-                .collect(Collectors.toList());
-        return getEachWordInfo(wordInfos);
+        List<WordInfo> wordInfo = new ArrayList<>();
+        for (Map.Entry<String, List<WordInfo>> entry : generateWordInfo(message).entrySet()) {
+            List<WordInfo> value = entry.getValue();
+            wordInfo.add(new WordInfo(entry.getKey(), value.size()));
+        }
+        wordInfo.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
+        return wordInfo;
     }
 
     private String generateWordFrequency(List<WordInfo> wordInfos) {
@@ -26,18 +28,12 @@ public class WordFrequencyGame {
         return joiner.toString();
     }
 
-    private List<WordInfo> getEachWordInfo(List<WordInfo> wordInfos) {
-        List<WordInfo> wordInfo = new ArrayList<>();
-        generateWordInfo(wordInfos).forEach((key, value) -> wordInfo.add(new WordInfo(key, value.size())));
-        wordInfos = wordInfo;
-        wordInfos.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
-
-        return wordInfos;
-    }
-
-    private Map<String, List<WordInfo>> generateWordInfo(List<WordInfo> wordInfoList) {
+    private Map<String, List<WordInfo>> generateWordInfo(String message) {
         Map<String, List<WordInfo>> map = new HashMap<>();
-        wordInfoList.forEach(wordInfo -> {
+        for (WordInfo wordInfo : Arrays
+                .stream(message.split(BLANK_SPACE))
+                .map(word -> new WordInfo(word, 1))
+                .collect(Collectors.toList())) {
             if (mapDoesNotContainWordFromWordInfo(map, wordInfo)) {
                 List<WordInfo> temporaryWordInfo = new ArrayList<>();
                 temporaryWordInfo.add(wordInfo);
@@ -45,7 +41,7 @@ public class WordFrequencyGame {
             } else {
                 map.get(wordInfo.getWord()).add(wordInfo);
             }
-        });
+        }
 
         return map;
     }
