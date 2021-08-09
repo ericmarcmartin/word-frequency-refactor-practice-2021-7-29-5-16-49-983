@@ -29,7 +29,8 @@ public class WordFrequencyGame {
 
     private String generateWordFrequency(List<WordInfo> wordInfos) {
         StringJoiner joiner = new StringJoiner("\n");
-        wordInfos.stream().map(w -> String.format("%s %d", w.getWord(), w.getWordCount())).forEach(joiner::add);
+        wordInfos.stream().map(wordInfo -> String.format("%s %d", wordInfo.getWord(), wordInfo.getWordCount()))
+                .forEachOrdered(joiner::add);
         return joiner.toString();
     }
 
