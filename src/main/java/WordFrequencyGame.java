@@ -15,9 +15,7 @@ public class WordFrequencyGame {
                     .map(word -> new WordInfo(word, 1))
                     .collect(Collectors.toList());
 
-            List<WordInfo> wordInfo = new ArrayList<>();
-            generateWordInfo(wordInfos).forEach((key, value) -> wordInfo.add(new WordInfo(key, value.size())));
-            wordInfos = wordInfo;
+            wordInfos = getEachWordInfo(wordInfos);
 
             wordInfos.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
 
@@ -29,6 +27,13 @@ public class WordFrequencyGame {
 
             return "Calculate Error";
         }
+    }
+
+    private List<WordInfo> getEachWordInfo(List<WordInfo> wordInfos) {
+        List<WordInfo> wordInfo = new ArrayList<>();
+        generateWordInfo(wordInfos).forEach((key, value) -> wordInfo.add(new WordInfo(key, value.size())));
+        wordInfos = wordInfo;
+        return wordInfos;
     }
 
 
