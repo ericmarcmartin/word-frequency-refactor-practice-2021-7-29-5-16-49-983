@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
 
@@ -11,10 +12,10 @@ public class WordFrequencyGame {
         try {
             String[] words = message.split(BLANK_SPACE);
 
-            List<WordInfo> wordInfos = new ArrayList<>();
-            for (String s : words) {
-                wordInfos.add(new WordInfo(s, 1));
-            }
+            List<WordInfo> wordInfos = Arrays
+                    .stream(words)
+                    .map(word -> new WordInfo(word, 1))
+                    .collect(Collectors.toList());
 
             //get the map for the next step of sizing the same word
             List<WordInfo> list = new ArrayList<>();
