@@ -13,9 +13,8 @@ public class WordFrequencyGame {
 
     private List<WordInfo> retrieveEachWordInfo(String message) {
         List<WordInfo> wordInfo = new ArrayList<>();
-        for (Map.Entry<String, List<WordInfo>> entry : generateWordInfo(message).entrySet()) {
-            List<WordInfo> value = entry.getValue();
-            wordInfo.add(new WordInfo(entry.getKey(), value.size()));
+        for (Map.Entry<String, List<WordInfo>> entry : generateWordInfo(message)) {
+            wordInfo.add(new WordInfo(entry.getKey(), entry.getValue().size()));
         }
         wordInfo.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
         return wordInfo;
@@ -28,7 +27,7 @@ public class WordFrequencyGame {
         return joiner.toString();
     }
 
-    private Map<String, List<WordInfo>> generateWordInfo(String message) {
+    private Set<Map.Entry<String, List<WordInfo>>> generateWordInfo(String message) {
         Map<String, List<WordInfo>> map = new HashMap<>();
         for (WordInfo wordInfo : Arrays
                 .stream(message.split(BLANK_SPACE))
@@ -43,11 +42,10 @@ public class WordFrequencyGame {
             }
         }
 
-        return map;
+        return map.entrySet();
     }
 
     private boolean mapDoesNotContainWordFromWordInfo(Map<String, List<WordInfo>> map, WordInfo wordInfo) {
         return !map.containsKey(wordInfo.getWord());
     }
-
 }
