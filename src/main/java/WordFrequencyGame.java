@@ -13,7 +13,7 @@ public class WordFrequencyGame {
 
     private List<WordInfo> retrieveEachWordInfo(String message) {
         List<WordInfo> wordInfo = new ArrayList<>();
-        for (Map.Entry<String, List<WordInfo>> entry : generateWordInfo(message)) {
+        for (Map.Entry<String, List<WordInfo>> entry : generateEachWord(message)) {
             wordInfo.add(new WordInfo(entry.getKey(), entry.getValue().size()));
         }
         wordInfo.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
@@ -27,7 +27,7 @@ public class WordFrequencyGame {
         return joiner.toString();
     }
 
-    private Set<Map.Entry<String, List<WordInfo>>> generateWordInfo(String message) {
+    private Set<Map.Entry<String, List<WordInfo>>> generateEachWord(String message) {
         Map<String, List<WordInfo>> map = new HashMap<>();
         for (WordInfo wordInfo : Arrays
                 .stream(message.split(BLANK_SPACE))
