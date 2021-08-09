@@ -12,7 +12,7 @@ public class WordFrequencyGame {
         try {
             List<WordInfo> wordInfos = retrieveEachWordInfo(message);
 
-            return generateOutput(wordInfos);
+            return generateWordFrequency(wordInfos);
         } catch (Exception e) {
 
             return "Calculate Error";
@@ -27,7 +27,7 @@ public class WordFrequencyGame {
         return getEachWordInfo(wordInfos);
     }
 
-    private String generateOutput(List<WordInfo> wordInfos) {
+    private String generateWordFrequency(List<WordInfo> wordInfos) {
         StringJoiner joiner = new StringJoiner("\n");
         wordInfos.stream().map(w -> String.format("%s %d", w.getValue(), w.getWordCount())).forEach(joiner::add);
         return joiner.toString();
@@ -38,6 +38,7 @@ public class WordFrequencyGame {
         generateWordInfo(wordInfos).forEach((key, value) -> wordInfo.add(new WordInfo(key, value.size())));
         wordInfos = wordInfo;
         wordInfos.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
+
         return wordInfos;
     }
 
@@ -59,6 +60,5 @@ public class WordFrequencyGame {
     private boolean mapDoesNotContainWordFromWordInfo(Map<String, List<WordInfo>> map, WordInfo wordInfo) {
         return !map.containsKey(wordInfo.getValue());
     }
-
 
 }
